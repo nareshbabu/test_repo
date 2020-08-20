@@ -1,6 +1,6 @@
-node {
-    checkout scm
-	stages {
+pipeline {
+    agent any
+    stages {
         stage('Build') {
             steps {
                 script {
@@ -9,8 +9,9 @@ node {
                     def major = versions[0]
                     def minor = versions[0] + '.' + versions[1]
                     def patch = version.trim()
+
                     docker.withRegistry('', 'dockerHub') {
-                        def image = docker.build('nareshbabu6/jenkinsdockertest:latest')
+                        def image = docker.build('nareshbabu6/jenkinsdockerversioning:latest')
                         image.push()
                         image.push(major)
                         image.push(minor)
@@ -19,5 +20,5 @@ node {
                 }
             }
         }
-    }	
+    }
 }
