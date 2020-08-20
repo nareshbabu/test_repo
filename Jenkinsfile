@@ -1,11 +1,23 @@
 node {
     checkout scm
-
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-
-        def customImage = docker.build("nareshbabu6/jenkinsdockertest:${env.BUILD_ID}")
-
-        /* Push the container to the custom Registry */
-        customImage.push()
-    }
+	stages {
+        stage('Build') {
+            steps {
+                script {
+                    def version = readFile('VERSION')
+                    def versions = version.split('\\.')
+                    def major = versions[0]
+                    def minor = versions[0] + '.' + versions[1]
+                    def patch = version.trim()
+                    docker.withRegistry('', 'dockerHub') {
+                        def image = docker.build('nareshbabu6/jenkinsdockertest:latest')
+                        image.push()
+                        image.push(major)
+                        image.push(minor)
+                        image.push(patch)
+                    }
+                }
+            }
+        }
+    }	
 }
