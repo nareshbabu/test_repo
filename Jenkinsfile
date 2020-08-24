@@ -10,7 +10,7 @@ pipeline {
                     def minor = versions[0] + '.' + versions[1]
                     def patch = version.trim()
 
-                    docker.withRegistry('353771058964.dkr.ecr.ap-south-1.amazonaws.com/testrepo', 'ecr:ap-south-1:shared_account_Rupeek') {
+                    docker.withRegistry('https://353771058964.dkr.ecr.ap-south-1.amazonaws.com/testrepo', 'ecr:ap-south-1:shared_account_Rupeek') {
                         def image = docker.build('testImageVersioning:latest')
                         image.push()
                         image.push(major)
