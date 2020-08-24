@@ -11,7 +11,7 @@ pipeline {
                     def patch = version.trim()
 
                     docker.withRegistry('https://353771058964.dkr.ecr.ap-south-1.amazonaws.com/testrepo', 'ecr:ap-south-1:shared_account_Rupeek') {
-                        def image = docker.build('testimageversioning:latest')
+                        def image = docker.build('testrepo:latest')
                         image.push()
                         image.push(major)
                         image.push(minor)
