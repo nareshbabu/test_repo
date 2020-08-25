@@ -1,3 +1,3 @@
 FROM busybox:latest
 MAINTAINER Naresh Babu (naresh.babu@rupeek.com)
-CMD ["ls -la"]
+CMD ["date +%s"]
