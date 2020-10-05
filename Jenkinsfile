@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Cloning Git') {
-            steps {
-                git 'https://github.com/nareshbabu/test_repo'
-            }
-        }
         stage('Build') {
             steps {
                 script {
